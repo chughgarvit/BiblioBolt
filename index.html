@@ -9,44 +9,75 @@
   <meta property="og:description" content="Stop switching tabs to manage your bibliography. Type \cite and paste.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --blue: #1a73e8;
-      --blue-dark: #1557b0;
-      --bg: #fafbff;
-      --text: #1a1a2e;
-      --text-muted: #555;
-      --card-bg: #fff;
-      --border: #e8ecf0;
+      --primary: #6366F1;
+      --primary-dark: #4F46E5;
+      --primary-light: #818CF8;
+      --accent: #059669;
+      --accent-light: #34D399;
+      --bg: #F5F3FF;
+      --bg-deep: #EEF2FF;
+      --surface: #FFFFFF;
+      --text: #1E1B4B;
+      --text-secondary: #4B5563;
+      --text-muted: #6B7280;
+      --border: #E0E7FF;
+      --border-subtle: #EEF2FF;
+      --code-bg: #F1F0FB;
+      --glow: rgba(99, 102, 241, 0.15);
+      --glow-strong: rgba(99, 102, 241, 0.25);
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
-    /* Nav */
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+    code, .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      background: var(--code-bg);
+      padding: 2px 8px;
+      border-radius: 6px;
+      color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    /* ---- NAV ---- */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(245, 243, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
       padding: 0 24px;
     }
     .nav-inner {
-      max-width: 960px;
+      max-width: 1080px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      height: 64px;
     }
     .nav-brand {
       display: flex;
@@ -55,51 +86,88 @@
       text-decoration: none;
       color: var(--text);
     }
-    .nav-brand img { width: 28px; height: 28px; border-radius: 6px; }
-    .nav-brand span { font-weight: 700; font-size: 16px; }
-    .nav-links { display: flex; gap: 24px; }
+    .nav-brand img {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px var(--glow);
+    }
+    .nav-brand span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
+      transition: color var(--transition);
     }
-    .nav-links a:hover { color: var(--blue); }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--primary);
+      color: #fff !important;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background var(--transition), transform 100ms;
+    }
+    .nav-cta:hover { background: var(--primary-dark); }
+    .nav-cta:active { transform: scale(0.97); }
 
-    /* Hero */
+    /* ---- HERO ---- */
     .hero {
-      padding: 120px 24px 60px;
+      padding: 140px 24px 80px;
       text-align: center;
-      max-width: 720px;
+      max-width: 800px;
       margin: 0 auto;
+      position: relative;
     }
     .hero-badge {
-      display: inline-block;
-      padding: 4px 14px;
-      background: #e8f0fe;
-      color: var(--blue);
-      border-radius: 20px;
-      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: var(--surface);
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 13px;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px var(--glow);
     }
+    .hero-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
     .hero h1 {
-      font-size: 48px;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      letter-spacing: -0.5px;
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -1.5px;
+      color: var(--text);
     }
-    .hero h1 .accent { color: var(--blue); }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .hero p {
       font-size: 18px;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto 32px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
     }
     .cta-row {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -107,139 +175,421 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 28px;
-      border-radius: 8px;
+      padding: 14px 32px;
+      border-radius: 10px;
       font-size: 15px;
       font-weight: 600;
       text-decoration: none;
-      transition: transform 0.1s, box-shadow 0.2s;
+      transition: all var(--transition);
+      cursor: pointer;
     }
-    .btn:active { transform: scale(0.98); }
+    .btn:active { transform: scale(0.97); }
     .btn-primary {
-      background: var(--blue);
+      background: var(--primary);
       color: #fff;
-      box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+      box-shadow: 0 4px 20px var(--glow-strong), 0 1px 3px rgba(0,0,0,0.1);
     }
-    .btn-primary:hover { background: var(--blue-dark); box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35); }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 8px 30px var(--glow-strong), 0 2px 6px rgba(0,0,0,0.12);
+      transform: translateY(-1px);
+    }
     .btn-secondary {
-      background: var(--card-bg);
+      background: var(--surface);
       color: var(--text);
       border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
-    .btn-secondary:hover { border-color: #ccc; }
-    .chrome-icon {
-      width: 20px; height: 20px;
+    .btn-secondary:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 4px 12px var(--glow);
     }
+    .btn svg { width: 18px; height: 18px; }
 
-    /* How it works */
-    .section { padding: 60px 24px; }
-    .section-inner { max-width: 960px; margin: 0 auto; }
-    .section-title {
+    /* Hero visual */
+    .hero-visual {
+      margin-top: 48px;
+      padding: 0 24px;
+    }
+    .demo-window {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.12), 0 1px 3px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .demo-titlebar {
+      padding: 12px 16px;
+      background: var(--bg-deep);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .demo-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .demo-dot.r { background: #FCA5A5; }
+    .demo-dot.y { background: #FCD34D; }
+    .demo-dot.g { background: #6EE7B7; }
+    .demo-titlebar-text {
+      flex: 1;
       text-align: center;
-      font-size: 32px;
-      font-weight: 700;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .demo-body {
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    .demo-body .kw { color: var(--primary); font-weight: 500; }
+    .demo-body .cmt { color: #9CA3AF; }
+    .demo-body .str { color: var(--accent); }
+    .demo-popup {
+      margin-top: 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .demo-popup-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .demo-popup-icon svg { width: 16px; height: 16px; color: #fff; }
+    .demo-popup-text { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
+    .demo-popup-text strong { color: var(--primary-dark); }
+
+    /* ---- SECTIONS ---- */
+    .section { padding: 80px 24px; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: 12px;
     }
-    .section-subtitle {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 16px;
-      margin-bottom: 48px;
+    .section-label svg { width: 16px; height: 16px; }
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      line-height: 1.2;
     }
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 17px;
+      margin-bottom: 48px;
+      max-width: 560px;
+      line-height: 1.6;
+    }
+    .section-center { text-align: center; }
+    .section-center .section-subtitle { margin-left: auto; margin-right: auto; }
 
+    /* ---- STEPS ---- */
     .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      counter-reset: step;
     }
     .step {
-      text-align: center;
-      padding: 32px 20px;
-      background: var(--card-bg);
-      border-radius: 12px;
+      position: relative;
+      padding: 32px 24px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .step:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 8px 30px var(--glow);
+      transform: translateY(-2px);
     }
     .step-num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px; height: 40px;
-      background: #e8f0fe;
-      color: var(--blue);
-      border-radius: 50%;
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      border-radius: 10px;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15px;
       margin-bottom: 16px;
     }
-    .step h3 { font-size: 16px; margin-bottom: 8px; }
-    .step p { font-size: 13px; color: var(--text-muted); }
-    .step code {
-      background: #f1f3f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 13px;
-      color: var(--blue-dark);
+    .step h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
     }
 
-    /* Features */
+    /* Connector arrows between steps */
+    .steps .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--primary-light);
+      border-bottom: 2px solid var(--primary-light);
+      transform: translateY(-50%) rotate(-45deg);
+      z-index: 1;
+    }
+
+    /* ---- FEATURES ---- */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
     .feature-card {
-      padding: 24px;
-      background: var(--card-bg);
-      border-radius: 12px;
+      padding: 28px 24px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .feature-card:hover {
+      border-color: var(--primary-light);
+      box-shadow: 0 8px 30px var(--glow);
+      transform: translateY(-2px);
     }
     .feature-icon {
-      font-size: 24px;
-      margin-bottom: 12px;
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
     }
-    .feature-card h3 { font-size: 15px; margin-bottom: 6px; }
-    .feature-card p { font-size: 13px; color: var(--text-muted); }
+    .feature-icon svg { width: 22px; height: 22px; }
+    .feature-icon.indigo { background: #EEF2FF; color: var(--primary); }
+    .feature-icon.emerald { background: #ECFDF5; color: #059669; }
+    .feature-icon.amber { background: #FFFBEB; color: #D97706; }
+    .feature-icon.rose { background: #FFF1F2; color: #E11D48; }
+    .feature-icon.sky { background: #F0F9FF; color: #0284C7; }
+    .feature-icon.violet { background: #F5F3FF; color: #7C3AED; }
+    .feature-icon.teal { background: #F0FDFA; color: #0D9488; }
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
 
-    /* Privacy */
+    /* ---- AUDIT SECTION ---- */
+    .audit-section {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    }
+    .audit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .audit-text h2 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .audit-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .audit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .audit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    .audit-list svg {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .audit-list .red { color: #DC2626; }
+    .audit-list .amber { color: #D97706; }
+    .audit-list .purple { color: #7C3AED; }
+    .audit-preview {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.08);
+    }
+    .audit-preview-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .audit-preview-header svg { width: 20px; height: 20px; color: var(--primary); }
+    .audit-preview-header span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .audit-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .audit-item.danger { background: #FEF2F2; color: #991B1B; border-left: 3px solid #DC2626; }
+    .audit-item.warning { background: #FFFBEB; color: #92400E; border-left: 3px solid #D97706; }
+    .audit-item.info { background: #F5F3FF; color: #5B21B6; border-left: 3px solid #7C3AED; }
+    .audit-item strong { font-weight: 600; }
+
+    /* ---- PRIVACY ---- */
     .privacy-section {
-      background: var(--card-bg);
+      background: var(--surface);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .privacy-list {
-      list-style: none;
-      max-width: 600px;
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 720px;
       margin: 0 auto;
     }
-    .privacy-list li {
-      padding: 8px 0;
-      font-size: 15px;
+    .privacy-item {
       display: flex;
       align-items: center;
       gap: 12px;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      background: var(--bg);
+      font-size: 14px;
+      color: var(--text-secondary);
     }
-    .privacy-check {
-      color: #34a853;
-      font-size: 18px;
-      font-weight: bold;
+    .privacy-item svg {
+      width: 18px; height: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
     }
 
-    /* Footer */
+    /* ---- BOTTOM CTA ---- */
+    .bottom-cta {
+      text-align: center;
+      padding: 80px 24px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    }
+    .bottom-cta h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .bottom-cta p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---- FOOTER ---- */
     footer {
       text-align: center;
-      padding: 40px 24px;
+      padding: 32px 24px;
       color: var(--text-muted);
       font-size: 13px;
+      border-top: 1px solid var(--border);
     }
-    footer a { color: var(--blue); text-decoration: none; }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer a:hover { text-decoration: underline; }
 
-    /* Responsive */
-    @media (max-width: 700px) {
-      .hero h1 { font-size: 32px; }
+    /* ---- SCROLL ANIMATIONS ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1), transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .hero { padding: 120px 20px 48px; }
+      .hero h1 { font-size: 36px; letter-spacing: -0.5px; }
       .hero p { font-size: 16px; }
-      .steps { grid-template-columns: 1fr; }
+      .section { padding: 56px 20px; }
+      .section-title { font-size: 28px; }
+      .section-subtitle { font-size: 15px; }
+      .steps { grid-template-columns: 1fr; gap: 16px; }
+      .steps .step::after { display: none; }
       .features-grid { grid-template-columns: 1fr; }
+      .audit-grid { grid-template-columns: 1fr; gap: 32px; }
+      .audit-text h2 { font-size: 28px; }
+      .privacy-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
+      .demo-body { font-size: 12px; padding: 16px; }
+      .bottom-cta h2 { font-size: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; opacity: 1; transform: none; }
+      * { transition-duration: 0ms !important; }
     }
   </style>
 </head>
@@ -248,49 +598,86 @@
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-brand">
-      <img src="icon.png" alt="BiblioBolt">
+      <img src="icon.png" alt="BiblioBolt" width="32" height="32">
       <span>BiblioBolt</span>
     </a>
     <div class="nav-links">
       <a href="#how-it-works">How it works</a>
       <a href="#features">Features</a>
+      <a href="#audit">Audit</a>
       <a href="#privacy">Privacy</a>
+      <a href="#" class="nav-cta" id="install-btn-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Install
+      </a>
     </div>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">Chrome Extension for Overleaf</div>
-  <h1>Cite faster.<br><span class="accent">Write more.</span></h1>
+  <div class="hero-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+    Chrome Extension for Overleaf
+  </div>
+  <h1>Cite faster.<br><span class="gradient">Write more.</span></h1>
   <p>Type <code>\cite</code> in Overleaf and BiblioBolt handles the rest &mdash; paste BibTeX, pick your .bib file, and the citation key appears at your cursor.</p>
   <div class="cta-row">
     <a href="#" class="btn btn-primary" id="install-btn">
-      <svg class="chrome-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-        <circle cx="12" cy="12" r="4" fill="currentColor"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Add to Chrome
     </a>
     <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
   </div>
+
+  <div class="hero-visual reveal">
+    <div class="demo-window">
+      <div class="demo-titlebar">
+        <div class="demo-dot r"></div>
+        <div class="demo-dot y"></div>
+        <div class="demo-dot g"></div>
+        <span class="demo-titlebar-text">main.tex &mdash; Overleaf</span>
+      </div>
+      <div class="demo-body">
+        <span class="cmt">% Introduction</span><br>
+        <span class="kw">\section</span>{Introduction}<br>
+        Recent advances in transformer architectures<br>
+        have shown promising results <span class="kw">\cite</span>{<span class="str">vaswani2017</span>}.<br>
+        <br>
+        <div class="demo-popup">
+          <div class="demo-popup-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="demo-popup-text">
+            <strong>BiblioBolt</strong> &mdash; Entry added to <strong>references.bib</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section class="section" id="how-it-works">
-  <div class="section-inner">
+  <div class="section-inner section-center">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      How it works
+    </div>
     <h2 class="section-title">Three keystrokes to cite</h2>
     <p class="section-subtitle">No tab switching. No copy-paste gymnastics. Just type and write.</p>
     <div class="steps">
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">1</div>
         <h3>Type <code>\cite</code></h3>
         <p>Start typing your citation command in Overleaf. BiblioBolt detects it and opens a popup.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">2</div>
         <h3>Paste or type</h3>
         <p>Paste a full BibTeX entry from Google Scholar &mdash; or just type the citation key if it already exists.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">3</div>
         <h3>Done</h3>
         <p>The entry goes into your .bib file, <code>\cite{key}</code> appears at your cursor, and Overleaf recompiles.</p>
@@ -299,38 +686,55 @@
   </div>
 </section>
 
+<!-- FEATURES -->
 <section class="section" id="features">
-  <div class="section-inner">
+  <div class="section-inner section-center">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Features
+    </div>
     <h2 class="section-title">Built for real paper writing</h2>
     <p class="section-subtitle">Every feature comes from actual frustrations writing LaTeX papers.</p>
     <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">&#128218;</div>
+      <div class="feature-card reveal">
+        <div class="feature-icon indigo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
         <h3>Multiple .bib files</h3>
-        <p>Working with 4-5 bibliography files? Pick the target from a dropdown on every citation, with your last choice remembered.</p>
+        <p>Working with several bibliography files? Pick the target from a dropdown on every citation, with your last choice remembered.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#128260;</div>
+      <div class="feature-card reveal">
+        <div class="feature-icon rose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
         <h3>Duplicate detection</h3>
         <p>Already added that paper? BiblioBolt checks the full .bib file and skips the insert, still placing the citation key for you.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#9889;</div>
+      <div class="feature-card reveal">
+        <div class="feature-icon amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
         <h3>Key-only mode</h3>
         <p>Already have the entry in your .bib? Just type the key &mdash; no BibTeX paste needed. BiblioBolt inserts <code>\cite{key}</code> instantly.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#128230;</div>
+      <div class="feature-card reveal">
+        <div class="feature-icon emerald">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4"/></svg>
+        </div>
         <h3>Batch citations</h3>
         <p>Paste multiple BibTeX entries at once, or type comma-separated keys. Get <code>\cite{a,b,c}</code> in one action.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#128190;</div>
+      <div class="feature-card reveal">
+        <div class="feature-icon sky">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        </div>
         <h3>Per-project memory</h3>
         <p>Your .bib file selection is remembered per Overleaf project. Switch projects and your preferences follow.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#128274;</div>
+      <div class="feature-card reveal">
+        <div class="feature-icon violet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
         <h3>Privacy first</h3>
         <p>Everything runs locally. No servers, no analytics, no data leaves your browser. Your research stays yours.</p>
       </div>
@@ -338,24 +742,121 @@
   </div>
 </section>
 
-<section class="section privacy-section" id="privacy">
+<!-- AUDIT -->
+<section class="section audit-section" id="audit">
   <div class="section-inner">
-    <h2 class="section-title">Privacy Policy</h2>
-    <p class="section-subtitle">BiblioBolt respects your data completely.</p>
-    <ul class="privacy-list">
-      <li><span class="privacy-check">&#10003;</span> No data is collected or transmitted to any server</li>
-      <li><span class="privacy-check">&#10003;</span> No analytics, tracking, or telemetry of any kind</li>
-      <li><span class="privacy-check">&#10003;</span> All settings stored locally via Chrome's storage API</li>
-      <li><span class="privacy-check">&#10003;</span> Only runs on Overleaf project pages (overleaf.com/project/*)</li>
-      <li><span class="privacy-check">&#10003;</span> No third-party scripts, libraries, or dependencies</li>
-      <li><span class="privacy-check">&#10003;</span> Open permission model &mdash; only requests activeTab and storage</li>
-    </ul>
+    <div class="audit-grid">
+      <div class="audit-text reveal">
+        <div class="section-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          New in v2.1
+        </div>
+        <h2>Bibliography audit</h2>
+        <p>One click to scan your entire project and catch issues before your advisor does.</p>
+        <ul class="audit-list">
+          <li>
+            <svg class="red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <span><strong>Undefined citations</strong> &mdash; keys in \cite{} with no matching .bib entry</span>
+          </li>
+          <li>
+            <svg class="amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span><strong>Orphaned entries</strong> &mdash; .bib entries never cited in any .tex file</span>
+          </li>
+          <li>
+            <svg class="purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
+            <span><strong>Duplicate detection</strong> &mdash; entries with matching DOIs or similar titles</span>
+          </li>
+        </ul>
+      </div>
+      <div class="audit-preview reveal">
+        <div class="audit-preview-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span>Bibliography Audit</span>
+        </div>
+        <div class="audit-item danger">
+          <strong>Undefined:</strong>&nbsp; chen2024deep not found in any .bib
+        </div>
+        <div class="audit-item danger">
+          <strong>Undefined:</strong>&nbsp; wang2023neural missing entry
+        </div>
+        <div class="audit-item warning">
+          <strong>Orphaned:</strong>&nbsp; smith2019 never cited
+        </div>
+        <div class="audit-item info">
+          <strong>Duplicate:</strong>&nbsp; liu2023 &harr; liu2023a &mdash; 92% title match
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="section privacy-section" id="privacy">
+  <div class="section-inner section-center">
+    <div class="section-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Privacy
+    </div>
+    <h2 class="section-title">Your data never leaves your browser</h2>
+    <p class="section-subtitle">BiblioBolt has zero servers, zero analytics, and zero tracking. Everything runs locally.</p>
+    <div class="privacy-grid">
+      <div class="privacy-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        No data collected or transmitted
+      </div>
+      <div class="privacy-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        No analytics or telemetry
+      </div>
+      <div class="privacy-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Settings stored locally via Chrome storage
+      </div>
+      <div class="privacy-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Only runs on overleaf.com/project/*
+      </div>
+      <div class="privacy-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        No third-party scripts or dependencies
+      </div>
+      <div class="privacy-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Minimal permissions: storage only
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2 class="reveal">Stop switching tabs to manage citations</h2>
+  <p class="reveal">Join researchers who cite faster with BiblioBolt.</p>
+  <div class="cta-row reveal">
+    <a href="#" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Add to Chrome
+    </a>
   </div>
 </section>
 
 <footer>
   <p>Built by <a href="https://chughgarvit.github.io/">Garvit Chugh</a></p>
 </footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
