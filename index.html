@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickCite — Cite Faster in Overleaf</title>
+  <meta name="description" content="A Chrome extension that lets you type \cite in Overleaf to instantly add BibTeX entries and insert citation keys. Multi-bib support, duplicate detection, batch citations.">
+  <meta property="og:title" content="QuickCite — Cite Faster in Overleaf">
+  <meta property="og:description" content="Stop switching tabs to manage your bibliography. Type \cite and paste.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="icon.png">
+  <style>
+    :root {
+      --blue: #1a73e8;
+      --blue-dark: #1557b0;
+      --bg: #fafbff;
+      --text: #1a1a2e;
+      --text-muted: #555;
+      --card-bg: #fff;
+      --border: #e8ecf0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-brand span { font-weight: 700; font-size: 16px; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    /* Hero */
+    .hero {
+      padding: 120px 24px 60px;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      background: #e8f0fe;
+      color: var(--blue);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 .accent { color: var(--blue); }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.1s, box-shadow 0.2s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+    }
+    .btn-primary:hover { background: var(--blue-dark); box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35); }
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: #ccc; }
+    .chrome-icon {
+      width: 20px; height: 20px;
+    }
+
+    /* How it works */
+    .section { padding: 60px 24px; }
+    .section-inner { max-width: 960px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 48px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .step {
+      text-align: center;
+      padding: 32px 20px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      background: #e8f0fe;
+      color: var(--blue);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .step h3 { font-size: 16px; margin-bottom: 8px; }
+    .step p { font-size: 13px; color: var(--text-muted); }
+    .step code {
+      background: #f1f3f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+      color: var(--blue-dark);
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      padding: 24px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .feature-card h3 { font-size: 15px; margin-bottom: 6px; }
+    .feature-card p { font-size: 13px; color: var(--text-muted); }
+
+    /* Privacy */
+    .privacy-section {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .privacy-list {
+      list-style: none;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .privacy-list li {
+      padding: 8px 0;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .privacy-check {
+      color: #34a853;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--blue); text-decoration: none; }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 16px; }
+      .steps { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img src="icon.png" alt="QuickCite">
+      <span>QuickCite</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Chrome Extension for Overleaf</div>
+  <h1>Cite faster.<br><span class="accent">Write more.</span></h1>
+  <p>Type <code>\cite</code> in Overleaf and QuickCite handles the rest &mdash; paste BibTeX, pick your .bib file, and the citation key appears at your cursor.</p>
+  <div class="cta-row">
+    <a href="#" class="btn btn-primary" id="install-btn">
+      <svg class="chrome-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+      </svg>
+      Add to Chrome — Free
+    </a>
+    <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+  </div>
+</section>
+
+<section class="section" id="how-it-works">
+  <div class="section-inner">
+    <h2 class="section-title">Three keystrokes to cite</h2>
+    <p class="section-subtitle">No tab switching. No copy-paste gymnastics. Just type and write.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Type <code>\cite</code></h3>
+        <p>Start typing your citation command in Overleaf. QuickCite detects it and opens a popup.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Paste or type</h3>
+        <p>Paste a full BibTeX entry from Google Scholar &mdash; or just type the citation key if it already exists.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Done</h3>
+        <p>The entry goes into your .bib file, <code>\cite{key}</code> appears at your cursor, and Overleaf recompiles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="section-inner">
+    <h2 class="section-title">Built for real paper writing</h2>
+    <p class="section-subtitle">Every feature comes from actual frustrations writing LaTeX papers.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#128218;</div>
+        <h3>Multiple .bib files</h3>
+        <p>Working with 4-5 bibliography files? Pick the target from a dropdown on every citation, with your last choice remembered.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128260;</div>
+        <h3>Duplicate detection</h3>
+        <p>Already added that paper? QuickCite checks the full .bib file and skips the insert, still placing the citation key for you.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9889;</div>
+        <h3>Key-only mode</h3>
+        <p>Already have the entry in your .bib? Just type the key &mdash; no BibTeX paste needed. QuickCite inserts <code>\cite{key}</code> instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128230;</div>
+        <h3>Batch citations</h3>
+        <p>Paste multiple BibTeX entries at once, or type comma-separated keys. Get <code>\cite{a,b,c}</code> in one action.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128190;</div>
+        <h3>Per-project memory</h3>
+        <p>Your .bib file selection is remembered per Overleaf project. Switch projects and your preferences follow.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128274;</div>
+        <h3>Privacy first</h3>
+        <p>Everything runs locally. No servers, no analytics, no data leaves your browser. Your research stays yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section privacy-section" id="privacy">
+  <div class="section-inner">
+    <h2 class="section-title">Privacy Policy</h2>
+    <p class="section-subtitle">QuickCite respects your data completely.</p>
+    <ul class="privacy-list">
+      <li><span class="privacy-check">&#10003;</span> No data is collected or transmitted to any server</li>
+      <li><span class="privacy-check">&#10003;</span> No analytics, tracking, or telemetry of any kind</li>
+      <li><span class="privacy-check">&#10003;</span> All settings stored locally via Chrome's storage API</li>
+      <li><span class="privacy-check">&#10003;</span> Only runs on Overleaf project pages (overleaf.com/project/*)</li>
+      <li><span class="privacy-check">&#10003;</span> No third-party scripts, libraries, or dependencies</li>
+      <li><span class="privacy-check">&#10003;</span> Open permission model &mdash; only requests activeTab and storage</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <a href="https://github.com/chughgarvit">Garvit Chugh</a> &middot; QuickCite is free and always will be.</p>
+</footer>
+
+</body>
+</html>
