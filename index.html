@@ -143,7 +143,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      padding: 10px 20px;
       background: var(--primary);
       color: #fff !important;
       border-radius: 8px;
@@ -190,6 +190,9 @@
       .nav-links .nav-cta {
         margin-top: 8px;
         justify-content: center;
+        padding: 12px 24px;
+        border-radius: 10px;
+        width: 100%;
       }
     }
 
@@ -287,15 +290,22 @@
     }
     .btn svg { width: 18px; height: 18px; }
 
-    /* Hero visual */
-    .hero-visual {
-      margin-top: 0;
-      padding: 0;
+    /* Focus-visible for keyboard navigation */
+    .btn:focus-visible,
+    .nav-cta:focus-visible,
+    .nav-brand:focus-visible,
+    .nav-links a:focus-visible,
+    .nav-hamburger:focus-visible,
+    .d-replay:focus-visible,
+    .m-replay:focus-visible,
+    footer a:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
     }
 
     /* ---- SECTIONS ---- */
     .section { padding: 88px 24px; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-inner { max-width: 1400px; margin: 0 auto; }
     .section-label {
       display: inline-flex;
       align-items: center;
@@ -512,6 +522,9 @@
     .mobile-demo { display: none; }
 
     /* ---- RESPONSIVE ---- */
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 42px; }
+    }
     @media (max-width: 900px) {
       .hero {
         flex-direction: column;
@@ -536,6 +549,7 @@
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .privacy-grid { grid-template-columns: 1fr; }
       .bottom-cta h2 { font-size: 28px; }
+      .bottom-cta { padding: 64px 24px; }
     }
     @media (max-width: 600px) {
       .features-grid { grid-template-columns: 1fr; }
@@ -544,7 +558,7 @@
       .hero { padding: 104px 16px 40px; }
       .hero h1 { font-size: 32px; }
       .hero p { font-size: 14px; }
-      .btn { padding: 12px 24px; font-size: 14px; }
+      .btn { padding: 14px 24px; font-size: 14px; }
     }
 
     /* ---- MOBILE DEMO STYLES ---- */
@@ -585,7 +599,7 @@
       border-bottom: 1px solid #e5e5e5;
       padding: 8px 12px;
       font-size: 11px;
-      color: #888;
+      color: #666;
       font-weight: 500;
       display: flex;
       align-items: center;
@@ -607,7 +621,7 @@
     .m-kw { color: #6366F1; font-weight: 500; }
     .m-cmt { color: #9ca3af; }
     .m-str { color: #059669; }
-    .m-br { color: #888; }
+    .m-br { color: #666; }
     .m-cursor {
       display: inline-block;
       width: 2px; height: 14px;
@@ -641,7 +655,7 @@
     }
     .m-popup-title svg { width: 16px; height: 16px; }
     .m-popup-bib {
-      font-size: 11px; color: #888; margin-bottom: 8px;
+      font-size: 11px; color: #666; margin-bottom: 8px;
     }
     .m-popup-bib strong { color: #333; }
     .m-popup-ta {
@@ -673,7 +687,7 @@
       font-weight: 600;
       border: none;
       border-radius: 5px;
-      cursor: default;
+      cursor: pointer;
     }
     .m-btn-cancel { background: #f1f3f4; color: #555; }
     .m-btn-cite { background: #6366F1; color: #fff; }
@@ -754,6 +768,10 @@
       transform-origin: top left;
       transform: scale(0.72);
     }
+    @media (min-width: 960px) {
+      .demo-clip { height: 452px; /* 580*0.78 */ }
+      .demo-stage { transform: scale(0.78); }
+    }
     @media (min-width: 1100px) {
       .demo-clip { height: 487px; /* 580*0.84 */ }
       .demo-stage { transform: scale(0.84); }
@@ -761,6 +779,7 @@
     @media (min-width: 1300px) {
       .demo-clip { height: 522px; /* 580*0.90 */ }
       .demo-stage { transform: scale(0.90); }
+      .hero { gap: 48px; }
     }
     .demo-stage .d-editor {
       position: absolute;
@@ -786,7 +805,7 @@
     .d-dot-g { background: #28c840; }
     .d-titlebar-text {
       flex: 1; text-align: center;
-      font-size: 12px; color: #888; font-weight: 500;
+      font-size: 12px; color: #666; font-weight: 500;
     }
     .d-layout {
       display: flex;
@@ -801,7 +820,7 @@
       color: #555;
     }
     .d-sidebar-title {
-      font-size: 9px; font-weight: 600; color: #999;
+      font-size: 9px; font-weight: 600; color: #777;
       text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
     }
     .d-file {
@@ -830,7 +849,7 @@
     .d-kw { color: #6366F1; font-weight: 500; }
     .d-cmt { color: #9ca3af; }
     .d-str { color: #059669; }
-    .d-br { color: #888; }
+    .d-br { color: #666; }
     .d-cursor {
       display: inline-block; width: 2px; height: 16px;
       background: #333; vertical-align: text-bottom;
@@ -875,7 +894,7 @@
     .d-bb-btns { display: flex; justify-content: flex-end; gap: 7px; margin-top: 10px; }
     .d-bb-btn {
       padding: 7px 16px; font-size: 13px; font-weight: 500;
-      border: none; border-radius: 6px; cursor: default;
+      border: none; border-radius: 6px; cursor: pointer;
     }
     .d-bb-cancel { background: #f1f3f4; color: #555; }
     .d-bb-cite { background: #6366F1; color: #fff; }
@@ -956,7 +975,7 @@
       <a href="#privacy">Privacy</a>
       <a href="https://chromewebstore.google.com/detail/bibliobolt-%E2%80%94-overleaf-cit/haahompajmdeoeljdblbpgipmacbebji" class="nav-cta" id="install-btn-nav" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Install
+        Install for Chrome
       </a>
     </div>
   </div>
@@ -1372,6 +1391,20 @@ have shown results <span id="m-target"></span><span class="m-cursor" id="m-curso
 
   async function runDemo() {
     resetAll();
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      cursor.style.display = '';
+      target.textContent = '';
+      var kw = document.createElement('span'); kw.className = 'd-kw'; kw.textContent = '\\cite';
+      var bo = document.createElement('span'); bo.className = 'd-br'; bo.textContent = '{';
+      var ks = document.createElement('span'); ks.className = 'd-str'; ks.textContent = 'vaswani2017attention';
+      var bc = document.createElement('span'); bc.className = 'd-br'; bc.textContent = '}';
+      target.appendChild(kw); target.appendChild(bo); target.appendChild(ks); target.appendChild(bc);
+      setLabel('', 'BiblioBolt \u2014 Cite faster in Overleaf');
+      replayBtn.classList.add('vis');
+      return;
+    }
+
     await wait(800);
 
     // Scene 1: type \cite
@@ -1508,6 +1541,19 @@ have shown results <span id="m-target"></span><span class="m-cursor" id="m-curso
 
   async function runMobileDemo() {
     resetM();
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      mCursor.style.display = '';
+      var kw = document.createElement('span'); kw.className = 'm-kw'; kw.textContent = '\\cite';
+      var bo = document.createElement('span'); bo.className = 'm-br'; bo.textContent = '{';
+      var ks = document.createElement('span'); ks.className = 'm-str'; ks.textContent = 'vaswani2017attention';
+      var bc = document.createElement('span'); bc.className = 'm-br'; bc.textContent = '}';
+      mTarget.appendChild(kw); mTarget.appendChild(bo); mTarget.appendChild(ks); mTarget.appendChild(bc);
+      setMLabel('', 'BiblioBolt \u2014 Cite faster');
+      mReplay.classList.add('vis');
+      return;
+    }
+
     await wait(600);
 
     // Step 1: type \cite
