@@ -48,6 +48,39 @@
       overflow-x: hidden;
     }
 
+    /* Hero mesh gradient backdrop */
+    .hero-backdrop {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(99, 102, 241, 0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 75% 20%, rgba(129, 140, 248, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 60% 80%, rgba(52, 211, 153, 0.06) 0%, transparent 60%),
+        linear-gradient(180deg, #F5F3FF 0%, #EEF2FF 60%, #F5F3FF 100%);
+    }
+    .hero-backdrop::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-backdrop::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -60px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
     h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
 
     code, .mono {
@@ -72,7 +105,7 @@
       padding: 0 24px;
     }
     .nav-inner {
-      max-width: 1080px;
+      max-width: 1400px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -82,7 +115,7 @@
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
       color: var(--text);
     }
@@ -109,8 +142,8 @@
     .nav-cta {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
+      gap: 8px;
+      padding: 8px 16px;
       background: var(--primary);
       color: #fff !important;
       border-radius: 8px;
@@ -123,13 +156,13 @@
 
     /* ---- HERO ---- */
     .hero {
-      padding: 120px 24px 80px;
-      max-width: 1200px;
+      padding: 136px 24px 96px;
+      max-width: 1400px;
       margin: 0 auto;
       position: relative;
       display: flex;
       align-items: center;
-      gap: 48px;
+      gap: 56px;
     }
     .hero-demo-col {
       flex: 1.15;
@@ -142,8 +175,8 @@
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 16px;
+      gap: 8px;
+      padding: 8px 16px;
       background: var(--surface);
       color: var(--primary);
       border: 1px solid var(--border);
@@ -158,7 +191,7 @@
       font-size: 48px;
       font-weight: 700;
       line-height: 1.1;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       letter-spacing: -1.5px;
       color: var(--text);
     }
@@ -172,20 +205,20 @@
       font-size: 17px;
       color: var(--text-secondary);
       max-width: 480px;
-      margin: 0 0 32px;
+      margin: 0 0 40px;
       line-height: 1.7;
     }
     .cta-row {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       flex-wrap: wrap;
     }
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 14px 32px;
-      border-radius: 10px;
+      padding: 16px 32px;
+      border-radius: 12px;
       font-size: 15px;
       font-weight: 600;
       text-decoration: none;
@@ -222,31 +255,31 @@
     }
 
     /* ---- SECTIONS ---- */
-    .section { padding: 80px 24px; }
-    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section { padding: 88px 24px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
     .section-label {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       font-size: 13px;
       font-weight: 600;
       color: var(--primary);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     .section-label svg { width: 16px; height: 16px; }
     .section-title {
       font-size: 36px;
       font-weight: 700;
       letter-spacing: -0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
       line-height: 1.2;
     }
     .section-subtitle {
       color: var(--text-secondary);
       font-size: 17px;
-      margin-bottom: 48px;
+      margin-bottom: 56px;
       max-width: 560px;
       line-height: 1.6;
     }
@@ -258,11 +291,10 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      counter-reset: step;
     }
     .step {
       position: relative;
-      padding: 32px 24px;
+      padding: 32px;
       background: var(--surface);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border);
@@ -316,10 +348,10 @@
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
     .feature-card {
-      padding: 28px 24px;
+      padding: 32px 24px;
       background: var(--surface);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border);
@@ -331,8 +363,8 @@
       transform: translateY(-2px);
     }
     .feature-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
+      width: 48px; height: 48px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -349,7 +381,7 @@
     .feature-card h3 {
       font-size: 16px;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       letter-spacing: -0.2px;
     }
     .feature-card p {
@@ -358,84 +390,6 @@
       line-height: 1.6;
     }
 
-    /* ---- AUDIT SECTION ---- */
-    .audit-section {
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-    }
-    .audit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .audit-text h2 {
-      font-size: 36px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
-    .audit-text p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-    .audit-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .audit-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 15px;
-      color: var(--text-secondary);
-    }
-    .audit-list svg {
-      width: 20px; height: 20px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .audit-list .red { color: #DC2626; }
-    .audit-list .amber { color: #D97706; }
-    .audit-list .purple { color: #7C3AED; }
-    .audit-preview {
-      background: var(--surface);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border);
-      padding: 24px;
-      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.08);
-    }
-    .audit-preview-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .audit-preview-header svg { width: 20px; height: 20px; color: var(--primary); }
-    .audit-preview-header span {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-    }
-    .audit-item {
-      padding: 10px 12px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .audit-item.danger { background: #FEF2F2; color: #991B1B; border-left: 3px solid #DC2626; }
-    .audit-item.warning { background: #FFFBEB; color: #92400E; border-left: 3px solid #D97706; }
-    .audit-item.info { background: #F5F3FF; color: #5B21B6; border-left: 3px solid #7C3AED; }
-    .audit-item strong { font-weight: 600; }
 
     /* ---- PRIVACY ---- */
     .privacy-section {
@@ -454,7 +408,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 16px;
+      padding: 16px;
       border-radius: var(--radius);
       background: var(--bg);
       font-size: 14px;
@@ -469,7 +423,7 @@
     /* ---- BOTTOM CTA ---- */
     .bottom-cta {
       text-align: center;
-      padding: 80px 24px;
+      padding: 88px 24px;
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
     }
     .bottom-cta h2 {
@@ -482,16 +436,17 @@
     .bottom-cta p {
       font-size: 17px;
       color: var(--text-secondary);
-      margin-bottom: 32px;
+      margin-bottom: 40px;
       max-width: 480px;
       margin-left: auto;
       margin-right: auto;
     }
+    .bottom-cta .cta-row { justify-content: center; }
 
     /* ---- FOOTER ---- */
     footer {
       text-align: center;
-      padding: 32px 24px;
+      padding: 40px 24px;
       color: var(--text-muted);
       font-size: 13px;
       border-top: 1px solid var(--border);
@@ -514,45 +469,222 @@
       transform: translateY(0);
     }
 
+    /* ---- MOBILE DEMO ---- */
+    .mobile-demo { display: none; }
+
     /* ---- RESPONSIVE ---- */
     @media (max-width: 900px) {
       .hero {
         flex-direction: column;
-        padding: 120px 20px 48px;
+        padding: 112px 16px 56px;
         text-align: center;
         gap: 32px;
       }
       .hero-demo-col { order: 2; width: 100%; }
       .hero-text-col { order: 1; }
-      .hero p { margin-left: auto; margin-right: auto; }
+      .hero h1 { font-size: 38px; letter-spacing: -0.8px; }
+      .hero p { margin-left: auto; margin-right: auto; font-size: 15px; max-width: 420px; }
       .cta-row { justify-content: center; }
-      .demo-stage {
-        transform: scale(0.36);
-        margin-bottom: -370px;
-      }
-      .demo-container { border-radius: 10px; }
-    }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 36px; letter-spacing: -0.5px; }
-      .hero p { font-size: 15px; }
-      .section { padding: 56px 20px; }
+      /* Hide desktop demo, show mobile demo */
+      .demo-container { display: none; }
+      .d-label-outer { display: none; }
+      .mobile-demo { display: block; }
+      .section { padding: 64px 20px; }
       .section-title { font-size: 28px; }
       .section-subtitle { font-size: 15px; }
       .steps { grid-template-columns: 1fr; gap: 16px; }
       .steps .step::after { display: none; }
-      .features-grid { grid-template-columns: 1fr; }
-      .audit-grid { grid-template-columns: 1fr; gap: 32px; }
-      .audit-text h2 { font-size: 28px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
       .privacy-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .bottom-cta h2 { font-size: 28px; }
     }
-    @media (max-width: 480px) {
-      .demo-stage {
-        transform: scale(0.30);
-        margin-bottom: -405px;
-      }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
     }
+    @media (max-width: 480px) {
+      .hero { padding: 104px 16px 40px; }
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 14px; }
+      .btn { padding: 12px 24px; font-size: 14px; }
+    }
+
+    /* ---- MOBILE DEMO STYLES ---- */
+    .m-demo {
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #1e1b4b;
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.2);
+      position: relative;
+    }
+    .m-step-label {
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #c4b5fd;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .m-step-badge {
+      background: #6366F1;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+    .m-editor-card {
+      margin: 0 10px 10px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .m-tab-bar {
+      background: #f5f5f5;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: #888;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .m-tab-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .m-tab-dot.r { background: #ff5f57; }
+    .m-tab-dot.y { background: #febc2e; }
+    .m-tab-dot.g { background: #28c840; }
+    .m-tab-file { margin-left: auto; }
+    .m-code {
+      padding: 14px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.9;
+      color: #333;
+      min-height: 120px;
+    }
+    .m-kw { color: #6366F1; font-weight: 500; }
+    .m-cmt { color: #9ca3af; }
+    .m-str { color: #059669; }
+    .m-br { color: #888; }
+    .m-cursor {
+      display: inline-block;
+      width: 2px; height: 14px;
+      background: #333;
+      vertical-align: text-bottom;
+      animation: d-blink 1s step-end infinite;
+    }
+
+    /* Mobile popup card */
+    .m-popup-card {
+      margin: 0 10px 10px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.25s ease;
+    }
+    .m-popup-card.vis {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .m-popup-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6366F1;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .m-popup-title svg { width: 16px; height: 16px; }
+    .m-popup-bib {
+      font-size: 11px; color: #888; margin-bottom: 8px;
+    }
+    .m-popup-bib strong { color: #333; }
+    .m-popup-ta {
+      width: 100%;
+      height: 80px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      line-height: 1.5;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      resize: none;
+      color: #333;
+      outline: none;
+    }
+    .m-popup-ta.focus {
+      border-color: #6366F1;
+      box-shadow: 0 0 0 2px rgba(99,102,241,0.1);
+    }
+    .m-popup-btns {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .m-popup-btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: default;
+    }
+    .m-btn-cancel { background: #f1f3f4; color: #555; }
+    .m-btn-cite { background: #6366F1; color: #fff; }
+    .m-btn-cite.flash { background: #4F46E5; transform: scale(0.96); }
+
+    /* Mobile toast */
+    .m-toast {
+      margin: 0 10px 10px;
+      background: #059669;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .m-toast.vis { opacity: 1; transform: translateY(0); }
+    .m-toast svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+
+    /* Mobile replay */
+    .m-replay {
+      position: absolute;
+      bottom: 8px; right: 10px;
+      background: rgba(99,102,241,0.85);
+      color: #fff;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 5;
+    }
+    .m-replay.vis { opacity: 1; }
+    .m-replay svg { width: 12px; height: 12px; }
 
     @media (prefers-reduced-motion: reduce) {
       .reveal { transition: none; opacity: 1; transform: none; }
@@ -568,19 +700,29 @@
       background: #1a1a2e;
       box-shadow: 0 20px 60px rgba(99, 102, 241, 0.18), 0 1px 3px rgba(0,0,0,0.1);
     }
-    .demo-stage {
+    /* Clip wrapper enforces visible height = stage height * scale */
+    .demo-clip {
       position: relative;
+      width: 100%;
+      overflow: hidden;
+      /* default desktop: scale 0.72 → height = 580*0.72 = 418 */
+      height: 418px;
+    }
+    .demo-stage {
+      position: absolute;
+      top: 0; left: 0;
       width: 1000px;
       height: 580px;
       transform-origin: top left;
-      transform: scale(0.62);
-      margin-bottom: -220px;
+      transform: scale(0.72);
     }
     @media (min-width: 1100px) {
-      .demo-stage {
-        transform: scale(0.68);
-        margin-bottom: -185px;
-      }
+      .demo-clip { height: 487px; /* 580*0.84 */ }
+      .demo-stage { transform: scale(0.84); }
+    }
+    @media (min-width: 1300px) {
+      .demo-clip { height: 522px; /* 580*0.90 */ }
+      .demo-stage { transform: scale(0.90); }
     }
     .demo-stage .d-editor {
       position: absolute;
@@ -701,45 +843,6 @@
     .d-bb-cite { background: #6366F1; color: #fff; }
     .d-bb-cite.flash { transform: scale(0.97); background: #4F46E5; }
 
-    /* audit overlay */
-    .d-audit-overlay {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.35); backdrop-filter: blur(2px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.2s;
-    }
-    .d-audit-overlay.vis { opacity: 1; pointer-events: auto; }
-    .d-audit-modal {
-      background: #fff; border-radius: 12px; padding: 22px; width: 460px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-      transform: scale(0.95) translateY(-8px); transition: transform 0.15s ease-out;
-    }
-    .d-audit-overlay.vis .d-audit-modal { transform: scale(1) translateY(0); }
-    .d-audit-h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 17px; font-weight: 700; color: #6366F1; margin-bottom: 3px;
-    }
-    .d-audit-sum { font-size: 12px; color: #666; margin-bottom: 14px; }
-    .d-nudge {
-      padding: 7px 10px; border-radius: 7px; font-size: 12px; font-weight: 600;
-      text-align: center; margin-bottom: 10px;
-      background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5;
-      opacity: 0; transform: translateY(-4px); transition: all 0.3s;
-    }
-    .d-nudge.vis { opacity: 1; transform: translateY(0); }
-    .d-audit-sec {
-      margin-bottom: 8px; padding: 10px; border-radius: 7px;
-      opacity: 0; transform: translateY(6px); transition: all 0.3s;
-    }
-    .d-audit-sec.vis { opacity: 1; transform: translateY(0); }
-    .d-audit-sec.danger { background: #ffebee; border-left: 3px solid #c62828; }
-    .d-audit-sec.warning { background: #fff3e0; border-left: 3px solid #e65100; }
-    .d-audit-sec.info { background: #f3e5f5; border-left: 3px solid #6a1b9a; }
-    .d-audit-sec h4 { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
-    .d-audit-sec.danger h4 { color: #c62828; }
-    .d-audit-sec.warning h4 { color: #e65100; }
-    .d-audit-sec.info h4 { color: #6a1b9a; }
-    .d-audit-sec p { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #555; }
 
     /* toast */
     .d-toast {
@@ -752,17 +855,36 @@
     .d-toast.vis { opacity: 1; transform: translateX(-50%) translateY(0); }
     .d-toast svg { width: 14px; height: 14px; }
 
-    /* scene label */
+    /* scene label — sits above demo container */
+    .d-label-outer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+      min-height: 40px;
+      align-items: center;
+    }
     .d-label {
-      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-      font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600;
-      color: #fff; opacity: 0; transition: opacity 0.3s; white-space: nowrap; z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 20px;
+      border-radius: 100px;
+      box-shadow: 0 2px 8px var(--glow);
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
     }
     .d-label.vis { opacity: 1; }
     .d-label .d-badge {
-      display: inline-block; background: #6366F1; color: #fff;
-      font-size: 10px; font-weight: 700; padding: 2px 8px;
-      border-radius: 100px; margin-right: 8px; vertical-align: middle;
+      display: inline-block; background: var(--primary); color: #fff;
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 100px; vertical-align: middle;
     }
 
     /* replay */
@@ -790,7 +912,6 @@
     <div class="nav-links">
       <a href="#how-it-works">How it works</a>
       <a href="#features">Features</a>
-      <a href="#audit">Audit</a>
       <a href="#privacy">Privacy</a>
       <a href="https://chromewebstore.google.com/detail/bibliobolt-%E2%80%94-overleaf-cit/haahompajmdeoeljdblbpgipmacbebji" class="nav-cta" id="install-btn-nav" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -801,11 +922,15 @@
 </nav>
 
 <!-- HERO -->
+<div class="hero-backdrop">
 <section class="hero">
   <div class="hero-demo-col">
     <div class="hero-visual reveal">
-    <div class="demo-container" id="demo-container">
+    <div class="d-label-outer">
       <div class="d-label" id="d-label"></div>
+    </div>
+    <div class="demo-container" id="demo-container">
+      <div class="demo-clip">
       <div class="demo-stage" id="demo-stage">
         <div class="d-editor">
           <div class="d-titlebar">
@@ -871,17 +996,6 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
           </div>
         </div>
 
-        <!-- Audit overlay -->
-        <div class="d-audit-overlay" id="d-audit-overlay">
-          <div class="d-audit-modal">
-            <div class="d-audit-h2">Bibliography Audit</div>
-            <div class="d-audit-sum">Scanned 3 .tex and 1 .bib files &mdash; 12 citations, 14 bib entries.</div>
-            <div class="d-nudge" id="d-nudge">5d until NeurIPS 2026 deadline &mdash; 3 issues found</div>
-            <div class="d-audit-sec danger" id="d-as1"><h4>Undefined Citations (1)</h4><p>chen2024deep</p></div>
-            <div class="d-audit-sec warning" id="d-as2"><h4>Orphaned Bib Entries (1)</h4><p>smith2019survey</p></div>
-            <div class="d-audit-sec info" id="d-as3"><h4>Possible Duplicates (1)</h4><p>liu2023 &harr; liu2023a &mdash; 92% title match</p></div>
-          </div>
-        </div>
 
         <!-- Toast -->
         <div class="d-toast" id="d-toast">
@@ -889,12 +1003,61 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
           <span id="d-toast-text">Entry added to references.bib</span>
         </div>
       </div>
+      </div><!-- /demo-clip -->
 
       <button class="d-replay" id="d-replay">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
         Replay
       </button>
     </div>
+
+    <!-- Mobile demo (hidden on desktop, shown on mobile) -->
+    <div class="mobile-demo">
+      <div class="m-demo" id="m-demo">
+        <div class="m-step-label" id="m-label">
+          <span class="m-step-badge" id="m-badge">Step 1</span>
+          <span id="m-label-text">Type \cite in Overleaf</span>
+        </div>
+
+        <div class="m-editor-card">
+          <div class="m-tab-bar">
+            <div class="m-tab-dot r"></div>
+            <div class="m-tab-dot y"></div>
+            <div class="m-tab-dot g"></div>
+            <span class="m-tab-file">main.tex</span>
+          </div>
+          <div class="m-code"><span class="m-cmt">% Introduction</span>
+<span class="m-kw">\section</span><span class="m-br">{</span>Introduction<span class="m-br">}</span>
+Recent advances in transformers
+have shown results <span id="m-target"></span><span class="m-cursor" id="m-cursor"></span></div>
+        </div>
+
+        <div class="m-popup-card" id="m-popup">
+          <div class="m-popup-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            BiblioBolt
+          </div>
+          <div class="m-popup-bib">Target: <strong>references.bib</strong></div>
+          <textarea class="m-popup-ta" id="m-ta" placeholder="Paste BibTeX or type keys..."></textarea>
+          <div class="m-popup-btns">
+            <button class="m-popup-btn m-btn-cancel">Cancel</button>
+            <button class="m-popup-btn m-btn-cite" id="m-cite-btn">Cite</button>
+          </div>
+        </div>
+
+        <div class="m-toast" id="m-toast">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Entry added to references.bib
+        </div>
+
+
+        <button class="m-replay" id="m-replay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          Replay
+        </button>
+      </div>
+    </div>
+
   </div>
   </div>
 
@@ -914,6 +1077,7 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
     </div>
   </div>
 </section>
+</div>
 
 <!-- HOW IT WORKS -->
 <section class="section" id="how-it-works">
@@ -1000,53 +1164,6 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
   </div>
 </section>
 
-<!-- AUDIT -->
-<section class="section audit-section" id="audit">
-  <div class="section-inner">
-    <div class="audit-grid">
-      <div class="audit-text reveal">
-        <div class="section-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-          New in v2.1
-        </div>
-        <h2>Bibliography audit</h2>
-        <p>One click to scan your entire project and catch issues before your advisor does.</p>
-        <ul class="audit-list">
-          <li>
-            <svg class="red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-            <span><strong>Undefined citations</strong> &mdash; keys in \cite{} with no matching .bib entry</span>
-          </li>
-          <li>
-            <svg class="amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <span><strong>Orphaned entries</strong> &mdash; .bib entries never cited in any .tex file</span>
-          </li>
-          <li>
-            <svg class="purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
-            <span><strong>Duplicate detection</strong> &mdash; entries with matching DOIs or similar titles</span>
-          </li>
-        </ul>
-      </div>
-      <div class="audit-preview reveal">
-        <div class="audit-preview-header">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          <span>Bibliography Audit</span>
-        </div>
-        <div class="audit-item danger">
-          <strong>Undefined:</strong>&nbsp; chen2024deep not found in any .bib
-        </div>
-        <div class="audit-item danger">
-          <strong>Undefined:</strong>&nbsp; wang2023neural missing entry
-        </div>
-        <div class="audit-item warning">
-          <strong>Orphaned:</strong>&nbsp; smith2019 never cited
-        </div>
-        <div class="audit-item info">
-          <strong>Duplicate:</strong>&nbsp; liu2023 &harr; liu2023a &mdash; 92% title match
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- PRIVACY -->
 <section class="section privacy-section" id="privacy">
@@ -1099,7 +1216,7 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
 </section>
 
 <footer>
-  <p>Built by <a href="https://chughgarvit.github.io/">Garvit Chugh</a></p>
+  <p>Built by <a href="https://chughgarvit.github.io/">Garvit Chugh</a> &middot; <a href="https://chromewebstore.google.com/detail/bibliobolt-%E2%80%94-overleaf-cit/haahompajmdeoeljdblbpgipmacbebji" target="_blank" rel="noopener">Chrome Web Store</a></p>
 </footer>
 
 <script>
@@ -1127,7 +1244,6 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
   var bbOverlay = document.getElementById('d-bb-overlay');
   var bbTa = document.getElementById('d-bb-ta');
   var bbCite = document.getElementById('d-bb-cite');
-  var auditOverlay = document.getElementById('d-audit-overlay');
   var toast = document.getElementById('d-toast');
   var toastText = document.getElementById('d-toast-text');
   var replayBtn = document.getElementById('d-replay');
@@ -1185,13 +1301,8 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
     bbTa.value = '';
     bbTa.classList.remove('focus');
     bbCite.classList.remove('flash');
-    auditOverlay.classList.remove('vis');
     toast.classList.remove('vis');
     replayBtn.classList.remove('vis');
-    document.getElementById('d-nudge').classList.remove('vis');
-    document.getElementById('d-as1').classList.remove('vis');
-    document.getElementById('d-as2').classList.remove('vis');
-    document.getElementById('d-as3').classList.remove('vis');
     cursor.style.display = '';
   }
 
@@ -1251,26 +1362,8 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
     await wait(100);
     setLabel('Done', 'Citation inserted, entry added to .bib');
     await showToast('Entry added to references.bib', 2200);
-    await wait(600);
+    await wait(800);
 
-    // Scene 5: audit
-    hideLabel();
-    await wait(200);
-    setLabel('Bonus', 'One-click bibliography audit');
-    await wait(500);
-    auditOverlay.classList.add('vis');
-    await wait(500);
-    document.getElementById('d-nudge').classList.add('vis');
-    await wait(350);
-    document.getElementById('d-as1').classList.add('vis');
-    await wait(250);
-    document.getElementById('d-as2').classList.add('vis');
-    await wait(250);
-    document.getElementById('d-as3').classList.add('vis');
-    await wait(3000);
-
-    auditOverlay.classList.remove('vis');
-    await wait(400);
     hideLabel();
     await wait(300);
     setLabel('', 'BiblioBolt \u2014 Cite faster in Overleaf');
@@ -1288,6 +1381,126 @@ shown remarkable results <span id="d-target"></span><span class="d-cursor" id="d
     }
   }, { threshold: 0.3 });
   demoObs.observe(document.getElementById('demo-container'));
+})();
+
+// Mobile demo animation
+(function () {
+  'use strict';
+
+  var mLabel = document.getElementById('m-label-text');
+  var mBadge = document.getElementById('m-badge');
+  var mTarget = document.getElementById('m-target');
+  var mCursor = document.getElementById('m-cursor');
+  var mPopup = document.getElementById('m-popup');
+  var mTa = document.getElementById('m-ta');
+  var mCiteBtn = document.getElementById('m-cite-btn');
+  var mToast = document.getElementById('m-toast');
+  var mReplay = document.getElementById('m-replay');
+
+  var BIBTEX_M = '@article{vaswani2017attention,\n  title={Attention is All You Need},\n  author={Vaswani, A. and others},\n  year={2017}\n}';
+
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function setMLabel(step, text) {
+    mBadge.textContent = step;
+    mBadge.style.display = step ? '' : 'none';
+    mLabel.textContent = text;
+  }
+
+  function typeM(el, text, speed) {
+    speed = speed || 80;
+    return new Promise(function (res) {
+      var i = 0;
+      (function t() {
+        if (i < text.length) { el.textContent += text[i++]; setTimeout(t, speed); }
+        else res();
+      })();
+    });
+  }
+
+  function typeTaM(el, text, speed) {
+    speed = speed || 14;
+    return new Promise(function (res) {
+      el.classList.add('focus');
+      var i = 0;
+      (function t() {
+        if (i < text.length) { el.value += text[i++]; setTimeout(t, speed); }
+        else res();
+      })();
+    });
+  }
+
+  function resetM() {
+    mTarget.textContent = '';
+    mCursor.style.display = '';
+    mPopup.classList.remove('vis');
+    mTa.value = '';
+    mTa.classList.remove('focus');
+    mCiteBtn.classList.remove('flash');
+    mToast.classList.remove('vis');
+    mReplay.classList.remove('vis');
+    setMLabel('Step 1', 'Type \\cite in Overleaf');
+  }
+
+  async function runMobileDemo() {
+    resetM();
+    await wait(600);
+
+    // Step 1: type \cite
+    await typeM(mTarget, '\\cite', 120);
+    await wait(400);
+
+    // Step 2: popup
+    setMLabel('Step 2', 'Popup appears');
+    mTarget.textContent = '';
+    mCursor.style.display = 'none';
+    mPopup.classList.add('vis');
+    await wait(600);
+
+    // Step 3: paste
+    setMLabel('Step 3', 'Paste BibTeX');
+    await wait(200);
+    await typeTaM(mTa, BIBTEX_M, 12);
+    await wait(400);
+
+    // Step 4: cite
+    setMLabel('Step 4', 'Click Cite');
+    await wait(300);
+    mCiteBtn.classList.add('flash');
+    await wait(200);
+    mCiteBtn.classList.remove('flash');
+    await wait(200);
+    mPopup.classList.remove('vis');
+    await wait(250);
+
+    // Show result
+    mCursor.style.display = '';
+    var kw = document.createElement('span'); kw.className = 'm-kw'; kw.textContent = '\\cite';
+    var bo = document.createElement('span'); bo.className = 'm-br'; bo.textContent = '{';
+    var ks = document.createElement('span'); ks.className = 'm-str'; ks.textContent = 'vaswani2017attention';
+    var bc = document.createElement('span'); bc.className = 'm-br'; bc.textContent = '}';
+    mTarget.appendChild(kw); mTarget.appendChild(bo); mTarget.appendChild(ks); mTarget.appendChild(bc);
+
+    setMLabel('', 'Citation inserted!');
+    mToast.classList.add('vis');
+    await wait(2200);
+    mToast.classList.remove('vis');
+    await wait(500);
+
+    setMLabel('', 'BiblioBolt \u2014 Cite faster');
+    mReplay.classList.add('vis');
+  }
+
+  mReplay.addEventListener('click', function () { runMobileDemo(); });
+
+  var mObs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      mObs.unobserve(entries[0].target);
+      runMobileDemo();
+    }
+  }, { threshold: 0.3 });
+  var mDemo = document.getElementById('m-demo');
+  if (mDemo) mObs.observe(mDemo);
 })();
 </script>
 
