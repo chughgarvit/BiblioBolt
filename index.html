@@ -154,6 +154,45 @@
     .nav-cta:hover { background: var(--primary-dark); }
     .nav-cta:active { transform: scale(0.97); }
 
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      color: var(--text);
+    }
+    .nav-hamburger svg { width: 24px; height: 24px; }
+    @media (max-width: 900px) {
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0; right: 0;
+        flex-direction: column;
+        background: rgba(245, 243, 255, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 24px;
+        gap: 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        padding: 12px 0;
+        font-size: 15px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .nav-links a:last-child { border-bottom: none; }
+      .nav-links .nav-cta {
+        margin-top: 8px;
+        justify-content: center;
+      }
+    }
+
     /* ---- HERO ---- */
     .hero {
       padding: 136px 24px 96px;
@@ -496,7 +535,6 @@
       .steps .step::after { display: none; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .privacy-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
       .bottom-cta h2 { font-size: 28px; }
     }
     @media (max-width: 600px) {
@@ -909,7 +947,10 @@
       <img src="icon.png" alt="BiblioBolt" width="32" height="32">
       <span>BiblioBolt</span>
     </a>
-    <div class="nav-links">
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="#how-it-works">How it works</a>
       <a href="#features">Features</a>
       <a href="#privacy">Privacy</a>
@@ -1220,6 +1261,29 @@ have shown results <span id="m-target"></span><span class="m-cursor" id="m-curso
 </footer>
 
 <script>
+  // Hamburger menu toggle
+  (function() {
+    var btn = document.getElementById('nav-hamburger');
+    var links = document.getElementById('nav-links');
+    var hamburgerSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+    var closeSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+    function setIcon(open) {
+      var svg = new DOMParser().parseFromString(open ? closeSVG : hamburgerSVG, 'image/svg+xml').documentElement;
+      btn.textContent = '';
+      btn.appendChild(document.importNode(svg, true));
+    }
+    btn.addEventListener('click', function() {
+      var isOpen = links.classList.toggle('open');
+      setIcon(isOpen);
+    });
+    links.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        links.classList.remove('open');
+        setIcon(false);
+      }
+    });
+  })();
+
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
